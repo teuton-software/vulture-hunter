@@ -19,15 +19,21 @@ public class Project {
 	
 	public void listFiles() {
 	    final String[] SUFFIX = {"java", "fxml", "xml", "gradle"};
-	    files = FileUtils.listFiles(rootDir, SUFFIX, true).stream().map(f -> {
-			try {
-				ComparedFile cf = new ComparedFile(f);
-				cf.setProject(this);
-				return cf;
-			} catch (IOException e) {
-				return null;
-			}
-		}).filter(f -> f != null).collect(Collectors.toList());
+	    files = 
+	    		FileUtils
+	    			.listFiles(rootDir, SUFFIX, true)
+	    			.stream()
+	    			.filter(f -> !f.getAbsolutePath().contains("target"))
+			    	.map(f -> {
+						try {
+							ComparedFile cf = new ComparedFile(f);
+							cf.setProject(this);
+							return cf;
+						} catch (IOException e) {
+							return null;
+						}
+			    	})
+			    	.filter(f -> f != null).collect(Collectors.toList());
 	}
 	
 	public File getRootDir() {

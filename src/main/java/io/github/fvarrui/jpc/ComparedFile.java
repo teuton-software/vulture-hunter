@@ -52,7 +52,8 @@ public class ComparedFile {
 
 	@Override
 	public String toString() {
-		return "[" + getProject().getName() + ":" +  getFile().getPath() + "]";
+		String relative = getProject().getRootDir().toURI().relativize(getFile().toURI()).getPath();
+		return "[" + getProject().getName() + ":" +  relative + "]";
 	}
 
 }
