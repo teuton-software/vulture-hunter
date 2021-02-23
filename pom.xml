@@ -58,6 +58,12 @@
 							<bundleJre>true</bundleJre>
 							<generateInstaller>false</generateInstaller>
 							<createZipball>true</createZipball>
+							<additionalResources>
+								<additionalResource>jpc.bat</additionalResource>
+							</additionalResources>
+							<winConfig>
+								<headerType>console</headerType>
+							</winConfig>
 						</configuration>
 					</execution>
 				</executions>
