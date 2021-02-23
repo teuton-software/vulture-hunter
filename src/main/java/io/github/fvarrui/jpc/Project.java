@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.FileUtils;
 
 public class Project {
-	
+
+    private static final String[] SUFFIXES = {"java", "fxml", "xml", "gradle", "txt", "json", "meta"};
+
 	private File rootDir;
 	private List<ComparedFile> files; 
 
@@ -18,10 +20,9 @@ public class Project {
 	}
 	
 	public void listFiles() {
-	    final String[] SUFFIX = {"java", "fxml", "xml", "gradle"};
 	    files = 
 	    		FileUtils
-	    			.listFiles(rootDir, SUFFIX, true)
+	    			.listFiles(rootDir, SUFFIXES, true)
 	    			.stream()
 	    			.filter(f -> !f.getAbsolutePath().contains("target"))
 			    	.map(f -> {
