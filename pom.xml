@@ -6,7 +6,7 @@
 
 	<groupId>io.github.fvarrui</groupId>
 	<artifactId>JavaProjectCompare</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
 	<description>Comparador de proyectos Java</description>
 
@@ -39,5 +39,31 @@
 			<version>1.4</version>
 		</dependency>
 	</dependencies>
+	
+		<build>
+		<plugins>
+			<plugin>
+				<groupId>io.github.fvarrui</groupId>
+				<artifactId>javapackager</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>package</goal>
+						</goals>
+						<configuration>
+							<organizationName>Francisco Vargas Ruiz</organizationName>
+							<platform>auto</platform>
+							<bundleJre>true</bundleJre>
+							<generateInstaller>false</generateInstaller>
+							<createZipball>true</createZipball>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
 
 </project>
