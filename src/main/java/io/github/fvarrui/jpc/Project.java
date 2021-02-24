@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 
 public class Project {
 
-    private static final String[] SUFFIXES = {"java", "fxml", "xml", "gradle", "txt", "json", "meta"};
+    private static final String[] SUFFIXES = {"java", "fxml", "xml", "gradle", "txt", "json", "meta", "html"};
 
 	private File rootDir;
 	private List<ComparedFile> files; 
@@ -34,7 +34,8 @@ public class Project {
 							return null;
 						}
 			    	})
-			    	.filter(f -> f != null).collect(Collectors.toList());
+			    	.filter(f -> f != null)
+			    	.collect(Collectors.toList());
 	}
 	
 	public File getRootDir() {

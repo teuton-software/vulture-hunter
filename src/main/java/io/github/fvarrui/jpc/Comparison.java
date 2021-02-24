@@ -14,8 +14,10 @@ public class Comparison {
 	private Project project1;
 	private Project project2;
 	private List<Match> matches;
+	private double similarity = 0.0;
+	private double threshold = 0.0;
 
-	public Comparison(Project project1, Project project2) throws IOException, DiffException {
+	public Comparison(final Project project1, final Project project2) throws IOException, DiffException {
 		this.project1 = project1;
 		this.project2 = project2;
 		this.matches = compare(project1, project2);
@@ -33,26 +35,46 @@ public class Comparison {
 		return matches;
 	}
 
-	public Project getProject1() {
+	public final Project getProject1() {
 		return project1;
 	}
 
-	public Project getProject2() {
+	public final Project getProject2() {
 		return project2;
 	}
 
-	public List<Match> getMatches() {
+	public final List<Match> getAllMatches() {
 		return matches;
 	}
 
-	public List<Match> getMatches(double threshold) {
+	public final List<Match> getMatches(double threshold) {
 		return matches.stream().filter(m -> m.getSimilarity() > threshold).collect(Collectors.toList());
 	}
 	
-	public double getSimilarity(double threshold) {
+	public double calculateSimilarity(double threshold) {
+		this.threshold = threshold;
 		int totalMatches = getMatches(threshold).size();
 		double totalFiles = (project1.getFiles().size() + project2.getFiles().size()) / 2.0;
-		return ((double)totalMatches / (double)totalFiles) * 100.0;
+		return similarity = ((double)totalMatches / (double)totalFiles) * 100.0;
+	}
+	
+	public double getSimilarity() {
+		return similarity;
+	}
+	
+	public double getThreshold() {
+		return threshold;
+	}
+	
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("-----------------------------------------------------------------------\n");
+		buffer.append("--->" + project1.getName() + " compared with " + project2.getName() + "\n");
+		buffer.append("-----------------------------------------------------------------------\n");
+		buffer.append("Estimated similarity between projects: " + String.format("%.2f", getSimilarity()) + "\n");
+		buffer.append("Showing matches:\n");
+		getMatches(threshold).forEach(m -> buffer.append(m + "\n"));
+		return buffer.toString();
 	}
 
 }

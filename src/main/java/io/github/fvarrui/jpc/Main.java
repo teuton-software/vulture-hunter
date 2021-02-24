@@ -19,6 +19,15 @@ import com.github.difflib.algorithm.DiffException;
 
 public class Main {
 
+	private static final String COMMAND_NAME = "jpc";
+	private static final String COMMAND_DESCRIPTION = "Comparison tool that determines the degree of similarity between two projects (aka \"Eagle Eye\" or \"Vulture Hunter\")";
+
+	private static final String OPTION_ALL = "all";
+	private static final String OPTION_HELP = "help";
+	private static final String OPTION_COMPARE = "compare";
+	private static final String OPTION_SIMILARITY = "similarity";
+	private static final String OPTION_THRESHOLD = "threashold";
+
 	private static final double THRESHOLD = 80.0;
 	private static final double SIMILARITY = 75.0;
 
@@ -44,48 +53,38 @@ public class Main {
 				submissions
 					.stream()
 					.filter(s2 -> s2.isDirectory() && !comparedProjects.contains(s2))
-					.forEach(s2 -> {
-						try {
-							compare(similarity, threshold, s1, s2);
-						} catch (IOException e) {
-							e.printStackTrace();
-						} catch (DiffException e) {
-							e.printStackTrace();
-						}
-					});
+					.map(s2 -> compare(threshold, s1, s2))
+					.filter(c -> c != null)
+					.filter(c -> c.getSimilarity() > similarity)
+					.forEach(System.out::println);
 				
 			});
 
 	}
 
-	public static Comparison compare(double similarity, double threshold, File submission1, File submission2) throws IOException, DiffException {
-		Project project1 = new Project(submission1);
-		Project project2 = new Project(submission2);
-		Comparison comparison = new Comparison(project1, project2);
-
-		double estimatedSimilarity = comparison.getSimilarity(threshold);
-
-
-		if (estimatedSimilarity > similarity) {
-
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("--->" + submission1.getName() + " compared with " + submission2.getName());
-			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("Estimated similarity between projects: " + String.format("%.2f", estimatedSimilarity));
-			System.out.println("Showing matches:");
-			comparison.getMatches(threshold).forEach(System.out::println);
-			System.out.println();
-
+	public static Comparison compare(double threshold, File submission1, File submission2) {
+		try {
+			Project project1 = new Project(submission1);
+			Project project2 = new Project(submission2);
+			Comparison comparison = new Comparison(project1, project2);
+			comparison.calculateSimilarity(threshold);
+			return comparison;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DiffException e) {
+			e.printStackTrace();
 		}
-		
-		return comparison;
+		return null;
 	}
 	
 	public static void help(Options options) {
 		
+		System.out.println(COMMAND_DESCRIPTION);
+		
 		// automatically generate the help statement
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("jpc", options);
+		formatter.printHelp(COMMAND_NAME, options);
+		
 	}
 
 	public static void main(String[] args) throws IOException, DiffException, URISyntaxException {
@@ -124,32 +123,29 @@ public class Main {
 			CommandLine line = parser.parse(options, args);
 			
 			// prints help
-			if (line.hasOption("help") || args.length == 0) {
+			if (line.hasOption(OPTION_HELP) || args.length == 0) {
 				help(options);
 			}
 			
 			double similarity = SIMILARITY;
-			if (line.hasOption("similarity")) {
-				similarity = Double.parseDouble(line.getOptionValue("similarity"));
+			if (line.hasOption(OPTION_SIMILARITY)) {
+				similarity = Double.parseDouble(line.getOptionValue(OPTION_SIMILARITY));
 			}
 
-			double threshold = SIMILARITY;
-			if (line.hasOption("threshold")) {
-				threshold = Double.parseDouble(line.getOptionValue("threshold"));
+			double threshold = THRESHOLD;
+			if (line.hasOption(OPTION_THRESHOLD)) {
+				threshold = Double.parseDouble(line.getOptionValue(OPTION_THRESHOLD));
 			}
 			
-			if (line.hasOption("all")) {
-				
-				compareAll(line.getOptionValue("all"), similarity, threshold);
+			if (line.hasOption(OPTION_ALL)) {
+				compareAll(line.getOptionValue(OPTION_ALL), similarity, threshold);
 			}
 
-			if (line.hasOption("compare")) {
-				
-				String [] values = line.getOptionValues("compare");
+			if (line.hasOption(OPTION_COMPARE)) {
+				String [] values = line.getOptionValues(OPTION_COMPARE);
 				File submission1 = new File(values[0]);
 				File submission2 = new File(values[1]);
-				compare(similarity, threshold, submission1, submission2);
-				
+				System.out.println(compare(threshold, submission1, submission2));				
 			}
 			
 		} catch (ParseException exp) {
