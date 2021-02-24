@@ -1,5 +1,5 @@
 # JavaProjectCompare
-Herramienta de comparación que determina el grado de similitud entre dos proyectos (también conocido como **El Ojo del Águila**). Está pensado para detectar si los alumnos se han copiado en proyectos de desarrollo de software, comparando el código fuente entregado.
+Herramienta de comparación que determina el grado de similitud entre dos proyectos (también conocido como **El Ojo de Águila** o **Cazador de Buitres**). Está pensado para detectar si los alumnos se han copiado en proyectos de desarrollo de software, comparando el código fuente entregado.
 
 ## Uso
 
