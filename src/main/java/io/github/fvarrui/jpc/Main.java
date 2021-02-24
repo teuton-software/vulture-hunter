@@ -26,7 +26,7 @@ public class Main {
 	private static final String OPTION_HELP = "help";
 	private static final String OPTION_COMPARE = "compare";
 	private static final String OPTION_SIMILARITY = "similarity";
-	private static final String OPTION_THRESHOLD = "threashold";
+	private static final String OPTION_THRESHOLD = "threshold";
 
 	private static final double THRESHOLD = 80.0;
 	private static final double SIMILARITY = 75.0;
@@ -95,10 +95,12 @@ public class Main {
 		options.addOption(Option.builder("s")
 				.longOpt("similarity")
                 .desc("degree of similarity between projects (default value: " + SIMILARITY + ")")
+                .hasArg()
                 .build());
 		options.addOption(Option.builder("t")
 				.longOpt("threshold")
                 .desc("degree of similarity between files to be considered equal (default value: " + THRESHOLD + ")")
+                .hasArg()
                 .build());
 		options.addOption(Option.builder("a")
 				.longOpt("all")
