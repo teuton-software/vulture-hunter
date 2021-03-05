@@ -24,7 +24,9 @@ public class Project {
 	    		FileUtils
 	    			.listFiles(rootDir, SUFFIXES, true)
 	    			.stream()
+	    			.filter(f -> !f.getAbsolutePath().contains("build"))
 	    			.filter(f -> !f.getAbsolutePath().contains("target"))
+	    			.filter(f -> !f.getAbsolutePath().contains(".idea"))
 			    	.map(f -> {
 						try {
 							ComparedFile cf = new ComparedFile(f);

@@ -2,9 +2,7 @@ package io.github.fvarrui.jpc.utils;
 
 import java.io.File;
 
-import static org.apache.commons.io.FilenameUtils.getExtension;
-
-public class FilenameUtils {
+public class FilenameUtils extends org.apache.commons.io.FilenameUtils {
 	
 	public static boolean equalExtensions(File file1, File file2) {
 		String ext1 = getExtension(file1.getName());

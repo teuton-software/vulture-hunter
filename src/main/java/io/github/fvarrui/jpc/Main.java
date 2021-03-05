@@ -1,6 +1,7 @@
 package io.github.fvarrui.jpc;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -17,10 +18,12 @@ import org.apache.commons.cli.ParseException;
 
 import com.github.difflib.algorithm.DiffException;
 
+import io.github.fvarrui.jpc.utils.ZipUtils;
+
 public class Main {
 
 	private static final String COMMAND_NAME = "jpc";
-	private static final String COMMAND_DESCRIPTION = "Comparison tool that determines the degree of similarity between two projects (aka \"Eagle Eye\" or \"Vulture Hunter\")";
+	private static final String COMMAND_DESCRIPTION = "Comparison tool to determine the degree of similarity between two projects (aka \"Eagle Eye\" or \"Vulture Hunter\")";
 
 	private static final String OPTION_ALL = "all";
 	private static final String OPTION_HELP = "help";
@@ -36,13 +39,47 @@ public class Main {
 		List<File> comparedProjects = new ArrayList<>();
 		
 		File submissionsDir = new File(submission);
-		List<File> submissions = Arrays.asList(submissionsDir.listFiles());
+		
+		// checks if specified file/folder exists 
+		if (!submissionsDir.exists()) {
+			throw new FileNotFoundException(submissionsDir + " doesn't exist");
+		}
+		
+		// checks if it's a file
+		if (submissionsDir.isFile()) {
+
+			File submissionsFile = submissionsDir;
+			
+			// checks if it's a zip file
+			if (ZipUtils.isCompressed(submissionsFile)) {
+				
+				System.out.print("Unzipping file " + submissionsFile + " ... ");
+				submissionsDir = ZipUtils.uncompress(submissionsFile, true);
+				System.out.println("[OK]");
+				
+			} else {
+				
+				System.out.println("[ERROR]");
+				throw new IllegalArgumentException(submissionsFile + " isn't a zipped file");
+				
+			}
+			
+		}
 
 		System.out.println("==========================================================");
 		System.out.println("===> " + submissionsDir.getName());
 		System.out.println("==========================================================");
 		System.out.println();
+		
+		List<File> submissions = Arrays.asList(submissionsDir.listFiles());
+		
+		// process submissions
+		submissions
+			.stream()
+			.filter(s -> s.isDirectory())
+			.forEach(s -> processSubmission(s));
 
+		// compares all found projects
 		submissions
 			.stream()
 			.filter(s1 -> s1.isDirectory())
@@ -60,6 +97,23 @@ public class Main {
 				
 			});
 
+	}
+	
+	public static void processSubmission(File submissionDir) {
+		System.out.println("Processing submission: " + submissionDir);
+		Arrays.asList(submissionDir.listFiles())
+			.stream()
+			.filter(f -> ZipUtils.isCompressed(f))
+			.forEach(f -> {
+				System.out.print("Unzipping " + f.getName() + " ... ");
+				try {
+					ZipUtils.uncompress(f);
+					f.delete();
+					System.out.println("[OK]");
+				} catch (IOException e) {
+					System.out.println("[ERROR] " + e.getMessage());
+				}				
+			});
 	}
 
 	public static Comparison compare(double threshold, File submission1, File submission2) {
