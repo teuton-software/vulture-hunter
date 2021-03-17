@@ -53,3 +53,30 @@ Al comparar proyectos, tanto con `--compare` como con `--all`, disponemos de las
 | `-s`, `--similarity` | Porcentaje de similitud entre dos proyectos para ser considerados sospechosos. Por defecto es 75%. |
 | `-t`, `--threshold`  | Porcentaje de similitud entre dos ficheros para ser considerados iguales. Por defecto es 80%. |
 
+## Ejemplo
+
+El siguiente comando compara los proyectos "alumno1" y "alumno2":
+
+```bash
+jpc --compare alumno1,alumno2 -t 75
+```
+
+Con el siguiente resultado:
+
+```bash
++-------------------------------+
+| alumno1 compared with alumno2 |
++-------------------------------+
+Compared files threshold: 75.0%
+Estimated similarity between projects: 100,00%
+Matches:
+* [alumno1:pom.xml] compared with [alumno2:pom.xml]: files match in a 96,88%. 
+* [alumno1:src/main/java/App.java] compared with [alumno2:src/main/java/App.java]: files match in a 100,00%. 
+* [alumno1:src/main/java/Configuracion.java] compared with [alumno2:src/main/java/Configu.java]: files match in a 100,00%. 
+* [alumno1:src/main/java/Controlador.java] compared with [alumno2:src/main/java/Controller.java]: files match in a 100,00%. 
+* [alumno1:src/main/java/Main.java] compared with [alumno2:src/main/java/Main.java]: files match in a 100,00%. 
+* [alumno1:src/main/java/Modelo.java] compared with [alumno2:src/main/java/Model.java]: files match in a 100,00%. 
+* [alumno1:src/main/resources/fxml/Ventana.fxml] compared with [alumno2:src/main/resources/fxml/Window.fxml]: files match in a 100,00%. 
+
+```
+
