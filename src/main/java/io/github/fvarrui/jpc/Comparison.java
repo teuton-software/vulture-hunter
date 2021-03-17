@@ -67,6 +67,7 @@ public class Comparison {
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(ConsoleUtils.frame(project1.getName() + " compared with " + project2.getName()));
+		buffer.append("Compared files threshold: " + threshold + "%\n");		
 		buffer.append("Estimated similarity between projects: " + String.format("%.2f", getSimilarity()) + "%\n");
 		buffer.append("Matches:\n");
 		getMatches(threshold).forEach(m -> buffer.append("* " + m + "\n"));
