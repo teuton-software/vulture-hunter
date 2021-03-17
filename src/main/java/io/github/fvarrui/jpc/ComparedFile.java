@@ -2,24 +2,15 @@ package io.github.fvarrui.jpc;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
-
-public class ComparedFile {
+public abstract class ComparedFile {
 
 	private Project project;
 	private File file;
-	private List<String> lines;
 	
-	public ComparedFile(File file) throws IOException {
+	public ComparedFile(File file, Project project) throws IOException {
+		this.project = project;		
 		this.file = file;
-		this.lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
-		this.lines = this.lines.stream().map(s -> StringUtils.trimToNull(s)).filter(s -> s != null).collect(Collectors.toList()); // removes empty/blank lines
-		// TODO remove Java comments
 	}
 	
 	public String getName() {
@@ -33,14 +24,6 @@ public class ComparedFile {
 	public void setFile(File file) {
 		this.file = file;
 	}
-
-	public List<String> getLines() {
-		return lines;
-	}
-
-	public void setLines(List<String> lines) {
-		this.lines = lines;
-	}
 	
 	public Project getProject() {
 		return project;
@@ -49,11 +32,16 @@ public class ComparedFile {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	
+	public String getRelativePath() {
+		return getProject().relativize(file);
+	}
+	
+	public abstract Match<?> compare(ComparedFile file) throws Exception;
 
 	@Override
 	public String toString() {
-		String relative = getProject().getRootDir().toURI().relativize(getFile().toURI()).getPath();
-		return "[" + getProject().getName() + ":" +  relative + "]";
+		return "[" + getProject().getName() + ":" +  getRelativePath() + "]";
 	}
 
 }

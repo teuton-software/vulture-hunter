@@ -1,34 +1,32 @@
 package io.github.fvarrui.jpc;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.difflib.algorithm.DiffException;
-
+import io.github.fvarrui.jpc.utils.ConsoleUtils;
 import io.github.fvarrui.jpc.utils.FilenameUtils;
 
 public class Comparison {
 
 	private Project project1;
 	private Project project2;
-	private List<Match> matches;
+	private List<Match<?>> matches;
 	private double similarity = 0.0;
 	private double threshold = 0.0;
 
-	public Comparison(final Project project1, final Project project2) throws IOException, DiffException {
+	public Comparison(final Project project1, final Project project2) throws Exception {
 		this.project1 = project1;
 		this.project2 = project2;
 		this.matches = compare(project1, project2);
 	}
 
-	private List<Match> compare(Project project1, Project project2) throws IOException, DiffException {
-		List<Match> matches = new ArrayList<>();
+	private List<Match<?>> compare(Project project1, Project project2) throws Exception {
+		List<Match<?>> matches = new ArrayList<>();
 		for (ComparedFile file1 : project1.getFiles()) {
 			for (ComparedFile file2 : project2.getFiles()) {
 				if (FilenameUtils.equalExtensions(file1.getFile(), file2.getFile())) {
-					matches.add(new Match(file1, file2));
+					matches.add(file1.compare(file2));
 				}
 			}
 		}
@@ -43,11 +41,11 @@ public class Comparison {
 		return project2;
 	}
 
-	public final List<Match> getAllMatches() {
+	public final List<Match<?>> getAllMatches() {
 		return matches;
 	}
 
-	public final List<Match> getMatches(double threshold) {
+	public final List<Match<?>> getMatches(double threshold) {
 		return matches.stream().filter(m -> m.getSimilarity() > threshold).collect(Collectors.toList());
 	}
 	
@@ -68,12 +66,10 @@ public class Comparison {
 	
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("-----------------------------------------------------------------------\n");
-		buffer.append("--->" + project1.getName() + " compared with " + project2.getName() + "\n");
-		buffer.append("-----------------------------------------------------------------------\n");
-		buffer.append("Estimated similarity between projects: " + String.format("%.2f", getSimilarity()) + "\n");
-		buffer.append("Showing matches:\n");
-		getMatches(threshold).forEach(m -> buffer.append(m + "\n"));
+		buffer.append(ConsoleUtils.frame(project1.getName() + " compared with " + project2.getName()));
+		buffer.append("Estimated similarity between projects: " + String.format("%.2f", getSimilarity()) + "%\n");
+		buffer.append("Matches:\n");
+		getMatches(threshold).forEach(m -> buffer.append("* " + m + "\n"));
 		return buffer.toString();
 	}
 

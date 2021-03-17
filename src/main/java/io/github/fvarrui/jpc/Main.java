@@ -18,6 +18,7 @@ import org.apache.commons.cli.ParseException;
 
 import com.github.difflib.algorithm.DiffException;
 
+import io.github.fvarrui.jpc.utils.ConsoleUtils;
 import io.github.fvarrui.jpc.utils.ZipUtils;
 
 public class Main {
@@ -66,10 +67,7 @@ public class Main {
 			
 		}
 
-		System.out.println("==========================================================");
-		System.out.println("===> " + submissionsDir.getName());
-		System.out.println("==========================================================");
-		System.out.println();
+		System.out.println(ConsoleUtils.frame(submissionsDir.getName()));
 		
 		List<File> submissions = Arrays.asList(submissionsDir.listFiles());
 		
@@ -79,6 +77,8 @@ public class Main {
 			.filter(s -> s.isDirectory())
 			.forEach(s -> processSubmission(s));
 
+		System.out.println();
+		
 		// compares all found projects
 		submissions
 			.stream()
@@ -123,9 +123,7 @@ public class Main {
 			Comparison comparison = new Comparison(project1, project2);
 			comparison.calculateSimilarity(threshold);
 			return comparison;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (DiffException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

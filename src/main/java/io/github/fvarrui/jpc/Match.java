@@ -1,56 +1,24 @@
 package io.github.fvarrui.jpc;
 
-import java.io.IOException;
-import java.util.List;
+public abstract class Match<T extends ComparedFile> {
 
-import com.github.difflib.DiffUtils;
-import com.github.difflib.algorithm.DiffException;
-import com.github.difflib.patch.AbstractDelta;
-import com.github.difflib.patch.Patch;
-
-public class Match {
-
-	private ComparedFile file1;
-	private ComparedFile file2;
+	private T file1;
+	private T file2;
 	private double similarity = 0.0;
-	private List<AbstractDelta<String>> deltas;
 
-	public Match(ComparedFile file1, ComparedFile file2) throws IOException, DiffException {
+	public Match(T file1, T file2) throws Exception {
 		this.file1 = file1;
 		this.file2 = file2;
 		this.similarity = compare();
 	}
 	
-	private int diffFiles(ComparedFile testFile1, ComparedFile testFile2) throws IOException, DiffException {
-		Patch<String> patch = DiffUtils.diff(testFile1.getLines(), testFile2.getLines());
-		deltas = patch.getDeltas();
-		return countDifferences(deltas);
-	}
-
-	private int countDifferences(List<AbstractDelta<String>> deltas) {
-		int count = 0;
-		for (AbstractDelta<String> delta : deltas) {
-			count += delta.getSource().size() + delta.getTarget().size();
-		}
-		return count;
-	}
+	protected abstract double compare() throws Exception;
 	
-	private double compare() throws IOException, DiffException {
-		int differences = diffFiles(file1, file2);
-		int file1Lines = file2.getLines().size();
-		int file2Lines = file2.getLines().size();
-		return 100.0 - ((double)differences / (double)(file1Lines + file2Lines)) * 100.0;
-	}
-	
-	public List<AbstractDelta<String>> getDeltas() {
-		return deltas;
-	}
-	
-	public ComparedFile getFile1() {
+	public T getFile1() {
 		return file1;
 	}
 	
-	public ComparedFile getFile2() {
+	public T getFile2() {
 		return file2;
 	}
 	
