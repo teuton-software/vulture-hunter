@@ -16,8 +16,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.github.difflib.algorithm.DiffException;
-
 import io.github.fvarrui.jpc.utils.ConsoleUtils;
 import io.github.fvarrui.jpc.utils.ZipUtils;
 
@@ -35,7 +33,7 @@ public class Main {
 	private static final double THRESHOLD = 80.0;
 	private static final double SIMILARITY = 75.0;
 
-	public static void compareAll(String submission, double similarity, double threshold) throws IOException, DiffException {
+	public static void compareAll(String submission, double similarity, double threshold) throws IOException {
 
 		List<File> comparedProjects = new ArrayList<>();
 		
@@ -139,7 +137,7 @@ public class Main {
 		
 	}
 
-	public static void main(String[] args) throws IOException, DiffException, URISyntaxException {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 
 		// options
 		Options options = new Options();

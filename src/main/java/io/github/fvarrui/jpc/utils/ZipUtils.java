@@ -78,7 +78,9 @@ public class ZipUtils {
 
 	private static void unzip(File source, File destination) throws IOException {
 		try {
-			new ZipFile(source).extractAll(destination.getAbsolutePath());
+			ZipFile zip = new ZipFile(source);
+			zip.extractAll(destination.getAbsolutePath());
+			zip.close();
 		} catch (ZipException e) {
 			throw new IOException(e);
 		}

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import com.github.difflib.DiffUtils;
-import com.github.difflib.algorithm.DiffException;
 import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
 
@@ -16,7 +15,7 @@ public class TextMatch extends Match<TextFile> {
 		super(file1, file2);
 	}
 	
-	private int diffFiles(TextFile testFile1, TextFile testFile2) throws IOException, DiffException {
+	private int diffFiles(TextFile testFile1, TextFile testFile2) throws IOException {
 		Patch<String> patch = DiffUtils.diff(testFile1.getLines(), testFile2.getLines());
 		deltas = patch.getDeltas();
 		return countDifferences(deltas);
