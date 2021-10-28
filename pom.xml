@@ -84,7 +84,7 @@
 							<generateInstaller>false</generateInstaller>
 							<createZipball>true</createZipball>
 							<additionalResources>
-								<additionalResource>jpc.bat</additionalResource>
+								<additionalResource>assets/jpc.bat</additionalResource>
 							</additionalResources>
 							<winConfig>
 								<headerType>console</headerType>
