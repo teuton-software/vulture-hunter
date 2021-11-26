@@ -1,4 +1,4 @@
-# Vulture Hunter
+# Vulture Hunter ![Vulture](vulture-24px.png) 
 Herramienta de comparación que determina el grado de similitud entre dos proyectos (también conocido como el **Cazador de Buitres**). Está pensado para detectar si los alumnos se han copiado en proyectos de desarrollo de software, comparando el código fuente entregado.
 
 ## Uso
@@ -80,5 +80,4 @@ Matches:
 
 ## Atribuciones
 
-Icono del buitre creado por <a href="https://www.freepik.com" title="Freepik">Freepik</a> en <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
-
+-   El icono del buitre ![Vulture](vulture-24px.png) ha sido creado por <a href="https://www.freepik.com" title="Freepik">Freepik</a> en <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
