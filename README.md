@@ -1,9 +1,22 @@
 # Vulture Hunter ![Vulture](vulture-24px.png) 
+
+[![Maven Central](http://img.shields.io/maven-central/v/io.github.fvarrui/VultureHunter)](https://search.maven.org/artifact/io.github.fvarrui/VultureHunter) [![GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-%0778B9.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+
 Herramienta de comparación que determina el grado de similitud entre dos proyectos (también conocido como el **Cazador de Buitres**). Está pensado para detectar si los alumnos se han copiado en proyectos de desarrollo de software, comparando el código fuente entregado.
 
-## Uso
+## Usar como una librería con Maven
 
-**Vulture Hunter** se utiliza desde la línea de comandos. El comando es `hunt`.
+```xml
+<dependency>
+	<groupId>io.github.fvarrui</groupId>
+	<artifactId>VultureHunter</artifactId>
+	<version>{latest.version}</version>
+</dependency>
+```
+
+## Usar desde la línea de comandos
+
+**Vulture Hunter** también puede utilizar desde la línea de comandos. [Descarga](https://github.com/fvarrui/VultureHunter/releases) y descomprime el fichero ZIP con la aplicación, y dentro encontrarás el comando `hunt`.
 
 ### Consultar la ayuda
 
@@ -24,7 +37,7 @@ usage: hunt
  -t,--threshold                   degree of similarity between files to be considered equal (default value: 80.0)
 ```
 
-## Comparar dos proyectos
+### Comparar dos proyectos
 
 Para comparar dos proyectos y ver el grado de similitud entre ambos, utilizamos la opción `-c` o `--compare`:
 
@@ -32,7 +45,7 @@ Para comparar dos proyectos y ver el grado de similitud entre ambos, utilizamos 
 hunt --compare path/to/project1,path/to/project2
 ```
 
-## Comparar múltiples proyectos
+### Comparar múltiples proyectos
 
 Es posible comparar entre sí todos los proyectos almacenados en una carpeta con la opción `-a` o `--all`:
 
@@ -42,7 +55,7 @@ hunt --all path/to/parent/folder
 
 > Esta opción está pensada para comparar proyectos entregados a través de un plataforma e-Learning como Moodle, donde es posible descargar un ZIP con todos las entregas. Una vez descomprimimos el ZIP con las entregas, podemos lanzar `jpc` con la opción `--all`.
 
-## Opciones
+### Opciones
 
 Al comparar proyectos, tanto con `--compare` como con `--all`, disponemos de las siguientes opciones:
 
@@ -51,7 +64,7 @@ Al comparar proyectos, tanto con `--compare` como con `--all`, disponemos de las
 | `-s`, `--similarity` | Porcentaje de similitud entre dos proyectos para ser considerados sospechosos. Por defecto es 75%. |
 | `-t`, `--threshold`  | Porcentaje de similitud entre dos ficheros para ser considerados iguales. Por defecto es 80%. |
 
-## Ejemplo
+### Ejemplo
 
 El siguiente comando compara los proyectos "alumno1" y "alumno2":
 
@@ -81,3 +94,4 @@ Matches:
 ## Atribuciones
 
 -   El [icono del buitre](https://www.flaticon.com/premium-icon/vulture_1747203) ![Vulture](vulture-24px.png) ha sido creado por [Freepik](https://www.freepik.com) en [www.flaticon.com](https://www.flaticon.com).
+
