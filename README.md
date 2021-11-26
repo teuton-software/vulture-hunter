@@ -80,4 +80,4 @@ Matches:
 
 ## Atribuciones
 
--   El icono del buitre ![Vulture](vulture-24px.png) ha sido creado por <a href="https://www.freepik.com" title="Freepik">Freepik</a> en <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
+-   El [icono del buitre](https://www.flaticon.com/premium-icon/vulture_1747203) ![Vulture](vulture-24px.png) ha sido creado por [Freepik](https://www.freepik.com) en [www.flaticon.com](https://www.flaticon.com).
