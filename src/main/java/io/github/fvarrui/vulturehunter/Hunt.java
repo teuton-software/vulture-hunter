@@ -19,7 +19,7 @@ import org.apache.commons.cli.ParseException;
 import io.github.fvarrui.vulturehunter.utils.ConsoleUtils;
 import io.github.fvarrui.vulturehunter.utils.ZipUtils;
 
-public class Main {
+public class Hunt {
 
 	private static final String COMMAND_NAME = "hunt";
 	private static final String COMMAND_DESCRIPTION = "Comparison tool to determine the degree of similarity between two projects (aka \"Vulture Hunter\")";
