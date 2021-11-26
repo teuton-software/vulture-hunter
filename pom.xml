@@ -5,16 +5,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.github.fvarrui</groupId>
-	<artifactId>JavaProjectCompare</artifactId>
-	<version>0.1.0</version>
+	<artifactId>VultureHunter</artifactId>
+	<version>0.2.0</version>
 
-	<description>Comparador de proyectos Java</description>
+	<description>Comparador de proyectos o cazador de buitres</description>
 
 	<properties>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<exec.mainClass>io.github.fvarrui.jpc.Main</exec.mainClass>
+		<exec.mainClass>io.github.fvarrui.vulturehunter.Main</exec.mainClass>
 	</properties>
 
 	<dependencies>
@@ -84,7 +84,7 @@
 							<generateInstaller>false</generateInstaller>
 							<createZipball>true</createZipball>
 							<additionalResources>
-								<additionalResource>assets/jpc.bat</additionalResource>
+								<additionalResource>assets/hunt.bat</additionalResource>
 							</additionalResources>
 							<winConfig>
 								<headerType>console</headerType>

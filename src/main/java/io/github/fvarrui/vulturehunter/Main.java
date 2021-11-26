@@ -1,4 +1,4 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,13 +16,13 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import io.github.fvarrui.jpc.utils.ConsoleUtils;
-import io.github.fvarrui.jpc.utils.ZipUtils;
+import io.github.fvarrui.vulturehunter.utils.ConsoleUtils;
+import io.github.fvarrui.vulturehunter.utils.ZipUtils;
 
 public class Main {
 
-	private static final String COMMAND_NAME = "jpc";
-	private static final String COMMAND_DESCRIPTION = "Comparison tool to determine the degree of similarity between two projects (aka \"Eagle Eye\" or \"Vulture Hunter\")";
+	private static final String COMMAND_NAME = "hunt";
+	private static final String COMMAND_DESCRIPTION = "Comparison tool to determine the degree of similarity between two projects (aka \"Vulture Hunter\")";
 
 	private static final String OPTION_ALL = "all";
 	private static final String OPTION_HELP = "help";

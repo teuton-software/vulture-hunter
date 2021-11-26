@@ -1,29 +1,27 @@
-# JavaProjectCompare
-Herramienta de comparación que determina el grado de similitud entre dos proyectos (también conocido como **El Ojo de Águila** o **Cazador de Buitres**). Está pensado para detectar si los alumnos se han copiado en proyectos de desarrollo de software, comparando el código fuente entregado.
+# Vulture Hunter
+Herramienta de comparación que determina el grado de similitud entre dos proyectos (también conocido como el **Cazador de Buitres**). Está pensado para detectar si los alumnos se han copiado en proyectos de desarrollo de software, comparando el código fuente entregado.
 
 ## Uso
 
-**JavaProjectCompare** se utiliza desde la línea de comandos. El comando es `jpc`.
+**Vulture Hunter** se utiliza desde la línea de comandos. El comando es `hunt`.
 
 ### Consultar la ayuda
 
-Para consultar la ayuda del comando, ejecutamos `jpc` sin parámetros o con las opciones `-h` o `--help`:
+Para consultar la ayuda del comando, ejecutamos `hunt` sin parámetros o con las opciones `-h` o `--help`:
 
 ```bash
-jpc --help
+hunt --help
 ```
 
 El resultado sería algo similar a lo siguiente:
 
 ```bash
-usage: jpc
+usage: hunt
  -a,--all <folder>                compare all projects in specified folder
  -c,--compare <folder1,folder2>   compare two projects
  -h,--help                        print this message
- -s,--similarity                  degree of similarity between projects
-                                  (default value: 75.0)
- -t,--threshold                   degree of similarity between files to be
-                                  considered equal (default value: 80.0)
+ -s,--similarity                  degree of similarity between projects (default value: 75.0)
+ -t,--threshold                   degree of similarity between files to be considered equal (default value: 80.0)
 ```
 
 ## Comparar dos proyectos
@@ -31,7 +29,7 @@ usage: jpc
 Para comparar dos proyectos y ver el grado de similitud entre ambos, utilizamos la opción `-c` o `--compare`:
 
 ```bash
-jpc --compare path/to/project1,path/to/project2
+hunt --compare path/to/project1,path/to/project2
 ```
 
 ## Comparar múltiples proyectos
@@ -39,7 +37,7 @@ jpc --compare path/to/project1,path/to/project2
 Es posible comparar entre sí todos los proyectos almacenados en una carpeta con la opción `-a` o `--all`:
 
 ```bash
-jpc --all path/to/parent/folder
+hunt --all path/to/parent/folder
 ```
 
 > Esta opción está pensada para comparar proyectos entregados a través de un plataforma e-Learning como Moodle, donde es posible descargar un ZIP con todos las entregas. Una vez descomprimimos el ZIP con las entregas, podemos lanzar `jpc` con la opción `--all`.
@@ -58,7 +56,7 @@ Al comparar proyectos, tanto con `--compare` como con `--all`, disponemos de las
 El siguiente comando compara los proyectos "alumno1" y "alumno2":
 
 ```bash
-jpc --compare alumno1,alumno2 -t 75
+hunt --compare alumno1,alumno2 -t 75
 ```
 
 Con el siguiente resultado:
@@ -79,4 +77,8 @@ Matches:
 * [alumno1:src/main/resources/fxml/Ventana.fxml] compared with [alumno2:src/main/resources/fxml/Window.fxml]: files match in a 100,00%. 
 
 ```
+
+## Atribuciones
+
+Icono del buitre creado por <a href="https://www.freepik.com" title="Freepik">Freepik</a> en <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.
 

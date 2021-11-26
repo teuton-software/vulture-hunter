@@ -1,4 +1,4 @@
-package io.github.fvarrui.jpc.utils;
+package io.github.fvarrui.vulturehunter.utils;
 
 import java.io.File;
 

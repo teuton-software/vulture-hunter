@@ -1,4 +1,4 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 import java.io.File;
 import java.io.IOException;

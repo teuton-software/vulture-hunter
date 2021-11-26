@@ -1,11 +1,11 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.github.fvarrui.jpc.utils.ConsoleUtils;
-import io.github.fvarrui.jpc.utils.FilenameUtils;
+import io.github.fvarrui.vulturehunter.utils.ConsoleUtils;
+import io.github.fvarrui.vulturehunter.utils.FilenameUtils;
 
 public class Comparison {
 

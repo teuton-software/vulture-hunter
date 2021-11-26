@@ -1,4 +1,4 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 public class BinaryMatch extends Match<BinaryFile> {
 

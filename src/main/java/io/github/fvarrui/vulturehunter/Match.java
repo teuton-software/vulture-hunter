@@ -1,4 +1,4 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 public abstract class Match<T extends ComparedFile> {
 

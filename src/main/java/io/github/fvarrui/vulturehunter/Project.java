@@ -1,4 +1,4 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 
-import io.github.fvarrui.jpc.utils.FilenameUtils;
+import io.github.fvarrui.vulturehunter.utils.FilenameUtils;
 
 public class Project {
 

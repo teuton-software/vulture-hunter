@@ -1,9 +1,9 @@
-package io.github.fvarrui.jpc;
+package io.github.fvarrui.vulturehunter;
 
 import java.io.File;
 import java.io.IOException;
 
-import io.github.fvarrui.jpc.utils.HashingUtils;
+import io.github.fvarrui.vulturehunter.utils.HashingUtils;
 
 public class BinaryFile extends ComparedFile {
 
