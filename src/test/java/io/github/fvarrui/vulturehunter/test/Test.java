@@ -9,7 +9,7 @@ public class Test {
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
 
-		Hunter.main(new String [] { "-c", ".,.", "-t", "java,fxml", "-e", "target/.*", "\\..*" });
+		Hunter.main(new String [] { "-c", ".,.", "-t", "java,xml", "-e", "target/.*,\\..*" });
 
 	}
 
