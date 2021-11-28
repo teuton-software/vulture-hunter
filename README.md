@@ -16,7 +16,7 @@ Herramienta de comparación que determina el grado de similitud entre dos proyec
 
 ## Usar desde la línea de comandos
 
-**Vulture Hunter** también puede utilizar desde la línea de comandos. [Descarga](https://github.com/fvarrui/VultureHunter/releases) y descomprime el fichero ZIP con la aplicación, y dentro encontrarás el comando `hunt`.
+**Vulture Hunter** también se puede utilizar desde la línea de comandos. [Descarga](https://github.com/fvarrui/VultureHunter/releases) y descomprime el fichero ZIP con la aplicación, y dentro encontrarás el comando `hunt`.
 
 ### Consultar la ayuda
 
@@ -29,12 +29,16 @@ hunt --help
 El resultado sería algo similar a lo siguiente:
 
 ```bash
+Comparison tool to determine the degree of similarity between two projects (aka "Vulture Hunter")
 usage: hunt
- -a,--all <folder>                compare all projects in specified folder
- -c,--compare <folder1,folder2>   compare two projects
- -h,--help                        print this message
- -s,--similarity                  degree of similarity between projects (default value: 75.0)
- -t,--threshold                   degree of similarity between files to be considered equal (default value: 80.0)
+ -a,--all <folder>                 compare all projects in specified folder
+ -b,--binary <ext1,ext2,...>       extensions of the included binary files (default value: all files)
+ -c,--compare <folder1,folder2>    compare two projects
+ -e,--excluded <path1,path2,...>   excluded relative paths (default value: empty)
+ -h,--help                         print this message
+ -s,--similarity <arg>             degree of similarity between projects (default value: 75.0)
+ -t,--text <ext1,ext2,...>         extensions of the included text files (default value: empty)
+ -th,--threshold <arg>             degree of similarity between files to be considered equal (default value: 80.0)
 ```
 
 ### Comparar dos proyectos
@@ -62,15 +66,17 @@ Al comparar proyectos, tanto con `--compare` como con `--all`, disponemos de las
 | Opción               | Descripción                                                  |
 | -------------------- | ------------------------------------------------------------ |
 | `-s`, `--similarity` | Porcentaje de similitud entre dos proyectos para ser considerados sospechosos. Por defecto es 75%. |
-| `-t`, `--threshold`  | Porcentaje de similitud entre dos ficheros para ser considerados iguales. Por defecto es 80%. |
+| `-th`, `--threshold` | Porcentaje de similitud entre dos ficheros para ser considerados iguales. Por defecto es 80%. |
 
 ### Ejemplo
 
-El siguiente comando compara los proyectos "alumno1" y "alumno2":
+El siguiente comando compara los proyectos "alumno1" y "alumno2", ambos de tipo Maven:
 
 ```bash
-hunt --compare alumno1,alumno2 -t 75
+hunt --compare alumno1,alumno2 --threshold 75 --text java,xml,fxml --excluded "target/.*","\..*"
 ```
+
+>   En el ejemplo anterior, se establece el umbral de similitud de ficheros en un 75%,  se comparan sólo los ficheros de texto con extensión `java`, `xml` o `fxml`, y se excluyen todas las rutas que comiencen por `target/` y las que comiencen por un `. ` (punto).
 
 Con el siguiente resultado:
 
