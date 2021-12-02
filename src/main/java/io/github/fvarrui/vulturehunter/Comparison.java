@@ -53,7 +53,7 @@ public class Comparison {
 		this.threshold = threshold;
 		int totalMatches = getMatches(threshold).size();
 		double totalFiles = (project1.getFiles().size() + project2.getFiles().size()) / 2.0;
-		return similarity = ((double)totalMatches / (double)totalFiles) * 100.0;
+		return similarity = Math.min(((double)totalMatches / (double)totalFiles) * 100.0, 100.0);
 	}
 	
 	public double getSimilarity() {
