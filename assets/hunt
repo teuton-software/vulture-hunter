@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+SCRIPTPATH=$(dirname $(readlink -e "$0"))
+BINARY="$SCRIPTPATH/VultureHunter"
+$BINARY $@

@@ -149,22 +149,25 @@
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
-			<!--  package as native windows app -->
+			<!-- package as native windows app -->
 			<plugin>
 				<groupId>io.github.fvarrui</groupId>
 				<artifactId>javapackager</artifactId>
 				<version>1.6.2</version>
+				<configuration>
+					<organizationName>Francisco Vargas Ruiz</organizationName>
+					<bundleJre>true</bundleJre>
+					<generateInstaller>false</generateInstaller>
+				</configuration>
 				<executions>
 					<execution>
+						<id>package-for-windows</id>
 						<phase>package</phase>
 						<goals>
 							<goal>package</goal>
 						</goals>
 						<configuration>
-							<organizationName>Francisco Vargas Ruiz</organizationName>
 							<platform>windows</platform>
-							<bundleJre>true</bundleJre>
-							<generateInstaller>false</generateInstaller>
 							<createZipball>true</createZipball>
 							<additionalResources>
 								<additionalResource>assets/hunt.bat</additionalResource>
@@ -172,6 +175,21 @@
 							<winConfig>
 								<headerType>console</headerType>
 							</winConfig>
+						</configuration>
+					</execution>
+					<execution>
+						<id>package-for-linux</id>
+						<phase>package</phase>
+						<goals>
+							<goal>package</goal>
+						</goals>
+						<configuration>
+							<platform>linux</platform>
+							<createTarball>true</createTarball>
+							<jdkPath>C:\Users\fvarrui\jdks\linux\jdk-11.0.13+8</jdkPath>
+							<additionalResources>
+								<additionalResource>assets/hunt</additionalResource>
+							</additionalResources>
 						</configuration>
 					</execution>
 				</executions>
