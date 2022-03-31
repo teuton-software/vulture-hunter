@@ -57,7 +57,7 @@ Es posible comparar entre sí todos los proyectos almacenados en una carpeta con
 hunt --all path/to/parent/folder
 ```
 
-> Esta opción está pensada para comparar proyectos entregados a través de un plataforma e-Learning como Moodle, donde es posible descargar un ZIP con todos las entregas. Una vez descomprimimos el ZIP con las entregas, podemos lanzar `jpc` con la opción `--all`.
+> Esta opción está pensada para comparar proyectos entregados a través de un plataforma e-Learning como Moodle, donde es posible descargar un ZIP con todos las entregas. Una vez descomprimimos el ZIP con las entregas, podemos lanzar `hunt` con la opción `--all`.
 
 ### Opciones
 
